@@ -1,0 +1,53 @@
+import { Kysely, sql } from "kysely";
+
+export async function up(db: Kysely<any>): Promise<void> {
+  await db.schema.createTable("pg_stat_statements")
+    .addColumn("userid", "text")
+    .addColumn("dbid", "text")
+    .addColumn("toplevel", "boolean")
+    .addColumn("queryid", "text")
+    .addColumn("query", "text")
+    .addColumn("plans", "text")
+    .addColumn("total_plan_time", "double")
+    .addColumn("min_plan_time", "double")
+    .addColumn("max_plan_time", "double")
+    .addColumn("mean_plan_time", "double")
+    .addColumn("stddev_plan_time", "double")
+    .addColumn("calls", "text")
+    .addColumn("total_exec_time", "double")
+    .addColumn("min_exec_time", "double")
+    .addColumn("max_exec_time", "double")
+    .addColumn("mean_exec_time", "double")
+    .addColumn("stddev_exec_time", "double")
+    .addColumn("rows", "text")
+    .addColumn("shared_blks_hit", "text")
+    .addColumn("shared_blks_read", "text")
+    .addColumn("shared_blks_dirtied", "text")
+    .addColumn("shared_blks_written", "text")
+    .addColumn("local_blks_hit", "text")
+    .addColumn("local_blks_read", "text")
+    .addColumn("local_blks_dirtied", "text")
+    .addColumn("local_blks_written", "text")
+    .addColumn("temp_blks_read", "text")
+    .addColumn("temp_blks_written", "text")
+    .addColumn("blk_read_time", "double")
+    .addColumn("blk_write_time", "double")
+    .addColumn("temp_blk_read_time", "double")
+    .addColumn("temp_blk_write_time", "double")
+    .addColumn("wal_records", "text")
+    .addColumn("wal_fpi", "text")
+    .addColumn("wal_bytes", "decimal")
+    .addColumn("jit_functions", "text")
+    .addColumn("jit_generation_time", "double")
+    .addColumn("jit_inlining_count", "text")
+    .addColumn("jit_inlining_time", "double")
+    .addColumn("jit_optimization_count", "text")
+    .addColumn("jit_optimization_time", "double")
+    .addColumn("jit_emission_count", "text")
+    .addColumn("jit_emission_time", "double")
+    .execute();
+}
+
+export async function down(db: Kysely<any>): Promise<void> {
+  await db.schema.dropTable("pg_stat_statements").execute();
+}
